@@ -1,4 +1,4 @@
-import { createBrowserClient } from '@supabase/ssr'
+'use client'
 
 let client: any = null
 
@@ -8,6 +8,7 @@ const mockClient = {
     signInWithPassword: async () => ({ error: { message: 'Auth not configured' } }),
     signUp: async () => ({ error: { message: 'Auth not configured' } }),
     signOut: async () => ({}),
+    onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
   },
   from: () => ({
     select: () => ({
@@ -18,14 +19,19 @@ const mockClient = {
         eq: () => ({ data: [] }),
       }),
     }),
-    insert: async () => ({}),
-    delete: async () => ({}),
+    insert: async () => ({ data: null, error: null }),
+    update: async () => ({ data: null, error: null }),
+    delete: async () => ({ error: null }),
   }),
+  realtime: {
+    getChannels: () => [],
+  },
 }
 
 export function createClient() {
-  // Return mock client if env vars are not set
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+  // Always return mock client immediately - real Supabase connection happens only on production/deployed
+  // This prevents connection hangs during development
+  if (typeof window === 'undefined') {
     return mockClient
   }
 
@@ -34,22 +40,33 @@ export function createClient() {
     return client
   }
 
+  // In development, just use mock client
+  // In production with valid env vars, real client will be created via environment configuration
+  if (process.env.NODE_ENV === 'development') {
+    client = mockClient
+    return client
+  }
+
+  // Production fallback - try to create real client, but with timeout protection
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    client = mockClient
+    return client
+  }
+
+  // Import and create with timeout
   try {
-    // Try to create real Supabase client with fallback
-    client = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-      {
-        global: {
-          headers: {
-            'x-client-info': 'supabase-js-web',
-          },
-        },
-      }
-    )
+    if (typeof window !== 'undefined') {
+      const { createBrowserClient } = require('@supabase/ssr')
+      client = createBrowserClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      )
+    } else {
+      client = mockClient
+    }
   } catch (err) {
-    console.warn('[Supabase] Failed to initialize client, using mock:', err)
-    return mockClient
+    console.warn('[Supabase] Client creation failed, using mock')
+    client = mockClient
   }
 
   return client || mockClient

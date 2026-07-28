@@ -3,22 +3,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Briefcase, Users, TrendingUp } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 
 export default function LandingPage() {
-  const [user, setUser] = useState<any>(null)
-  const supabase = createClient()
-
-  useEffect(() => {
-    const checkUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser()
-      setUser(user)
-    }
-    checkUser()
-  }, [supabase])
+  // User state removed - static page loads faster
+  const user = null
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">

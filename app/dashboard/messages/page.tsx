@@ -14,6 +14,9 @@ interface Message {
   body: string
   read: boolean
   created_at: string
+  updated_at?: string
+  application_id?: string | null
+  senderInfo?: SenderInfo
 }
 
 interface SenderInfo {

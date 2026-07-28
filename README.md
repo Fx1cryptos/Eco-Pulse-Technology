@@ -1,149 +1,236 @@
-# 🌍 Eco Pulse Technology
+# Eco Pulse Technology - Employment Platform
 
-> **Empowering Talent. Creating Opportunities.**
+A professional, full-featured employment platform built with Next.js 16, Supabase, and TypeScript.
 
-Eco Pulse Technology is a modern employment platform built to connect talented professionals with trusted employers through a secure, intelligent, and user-friendly hiring experience.
+## Features
 
-Our mission is to reduce unemployment by making career opportunities more accessible while helping businesses find qualified candidates efficiently.
+### For Job Seekers
+- Browse and search available jobs
+- Apply to job positions with cover letters
+- Save favorite jobs for later
+- View application status and history
+- Manage profile and upload resume
+- Receive notifications about application updates
+- Message with employers
 
----
+### For Employers
+- Create company profile
+- Post and manage job listings
+- View and manage applications
+- Communicate with candidates
+- Advanced filtering and search
+- Analytics dashboard
 
-## ✨ Features
+### For Admins
+- Monitor platform activity
+- Manage users and permissions
+- Verify companies and employers
+- Monitor job postings
+- System analytics and reporting
 
-- 🔐 Secure Authentication (Email & Password)
-- 👤 Job Seeker Dashboard
-- 🏢 Employer Dashboard
-- 🛠️ Admin Dashboard
-- 💼 Job Listings
-- 🔍 Advanced Job Search & Filters
-- 📄 Resume Builder
-- 📎 Resume Upload
-- 📬 One-Click Job Applications
-- ❤️ Save Favorite Jobs
-- 🔔 Real-Time Notifications
-- 💬 Employer & Candidate Messaging
-- ⭐ Company Reviews & Testimonials
-- 📚 Career Resources
-- 📰 Blog & News
-- 📱 Fully Responsive Design
-- 🌙 Dark Mode Support
-- ⚡ Fast & SEO Optimized
+## Tech Stack
 
----
+- **Frontend**: Next.js 16, React 19, TypeScript
+- **Styling**: Tailwind CSS, custom dark theme
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth (Email/Password)
+- **Icons**: Lucide React
+- **Date Handling**: date-fns
+- **State Management**: SWR, React Hooks
 
-## 💼 Available Job Categories
+## Database Schema
 
-- Transcriptionist
-- Bookkeeper
-- Freelance Writer
-- Sales Representative
-- Recruiter
-- Content Marketer
-- Inbound Call Agent
-- Accounting Payroll Clerk
-- Administrative Assistant
-- Front Desk Clerk
-- Typist Clerk
-- Project Manager
-- Operations Manager
-- Dispatcher
-- Copywriter
-- Medical Coder
-- Social Media Manager
-- Customer Service Representative
-- Sales Associate
-- Data Analyst
-- Virtual Assistant
-- Data Entry Clerk
+### Core Tables
+- `profiles` - User profile information
+- `companies` - Company/Employer details
+- `jobs` - Job listings
+- `applications` - Job applications
+- `saved_jobs` - Bookmarked jobs
+- `messages` - Direct messaging
+- `notifications` - User notifications
+- `job_categories` - Job categorization
 
----
+All tables include Row-Level Security (RLS) policies for data protection.
 
-## 🎨 Brand Colors
+## Getting Started
 
-| Color | Hex |
-|--------|------|
-| Royal Blue | `#0504AA` |
-| White | `#FFFFFF` |
-| Gold | `#D4AF37` |
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+- Supabase account
 
----
+### Installation
 
-## 🛠️ Tech Stack
+1. Clone the repository:
+```bash
+git clone https://github.com/Fx1cryptos/Eco-Pulse-Technology.git
+cd Eco-Pulse-Technology
+```
 
-### Frontend
+2. Install dependencies:
+```bash
+npm install --legacy-peer-deps
+```
 
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- shadcn/ui
-- Framer Motion
+3. Set up environment variables:
+Create a `.env.local` file with:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL=http://localhost:3000
+```
 
-### Backend
+Get these values from your Supabase project settings.
 
-- Supabase
-- PostgreSQL
-- Prisma ORM
-- Next.js API Routes
+4. Run the development server:
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## User Roles
+
+### Job Seeker
+- Sign up as a job seeker
+- Browse job listings
+- Apply to positions
+- Track applications
+- Manage profile
+
+### Employer
+- Sign up as employer
+- Create company profile
+- Post jobs
+- Review applications
+- Communicate with candidates
+
+### Admin
+- Administrative access to platform
+- User management
+- System monitoring
+- Content moderation
+
+## Project Structure
+
+```
+app/
+├── auth/                    # Authentication pages
+│   ├── login/
+│   ├── sign-up/
+│   ├── callback/
+│   └── error/
+├── dashboard/               # User dashboards
+│   ├── jobs/                # Job seeker features
+│   ├── employer/            # Employer features
+│   ├── admin/               # Admin features
+│   └── messages/            # Messaging
+├── layout.tsx               # Root layout
+└── page.tsx                 # Landing page
+
+components/
+├── notifications.tsx        # Notification dropdown
+└── sidebar-nav.tsx          # Navigation component
+
+lib/
+└── supabase/                # Supabase utilities
+    ├── client.ts
+    ├── server.ts
+    └── proxy.ts
+```
+
+## Authentication Flow
+
+1. Users sign up with email and password
+2. Email confirmation required
+3. Profile creation on first login
+4. Role-based dashboard routing
+5. Secure session management with Supabase
+
+## Row Level Security
+
+All data is protected with RLS policies ensuring:
+- Users can only access their own profiles
+- Employers see only their job postings
+- Job seekers see only public job listings
+- Messages are private between sender/receiver
+- Notifications belong to specific users
+
+## Deployment
+
+### Deploy to Vercel
+
+1. Push code to GitHub
+2. Import repository to Vercel
+3. Add environment variables in Vercel settings
+4. Deploy
+
+```bash
+# Vercel CLI
+vercel deploy
+```
+
+### Environment Variables on Vercel
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+## Development
+
+### Running Tests
+```bash
+npm run test
+```
+
+### Building for Production
+```bash
+npm run build
+npm run start
+```
+
+### Linting
+```bash
+npm run lint
+```
+
+## API Routes
 
 ### Authentication
+- `POST /auth/login` - Login endpoint
+- `POST /auth/sign-up` - Registration endpoint
+- `POST /auth/logout` - Logout endpoint
 
-- Supabase Auth
-- Email Login
-- Google Sign-In
+### Jobs
+- `GET /api/jobs` - List all jobs
+- `POST /api/jobs` - Create job (employer only)
+- `GET /api/jobs/[id]` - Get job details
+- `PUT /api/jobs/[id]` - Update job
+- `DELETE /api/jobs/[id]` - Delete job
 
-### Deployment
+### Applications
+- `GET /api/applications` - List applications
+- `POST /api/applications` - Submit application
+- `PUT /api/applications/[id]` - Update status
 
-- Vercel
+### Messages
+- `GET /api/messages` - Get messages
+- `POST /api/messages` - Send message
+- `PUT /api/messages/[id]` - Mark as read
 
----
+## Contributing
 
-## 🚀 Our Mission
+1. Create feature branch: `git checkout -b feature/amazing-feature`
+2. Commit changes: `git commit -m 'Add amazing feature'`
+3. Push to branch: `git push origin feature/amazing-feature`
+4. Open Pull Request
 
-To empower individuals by connecting them with meaningful employment opportunities while helping organizations discover exceptional talent through innovative technology.
-
----
-
-## 🌟 Vision
-
-To become a trusted global employment platform that transforms careers, empowers businesses, and creates opportunities without boundaries.
-
----
-
-## 📬 Contact
-
-📧 Email
-
-ecopulsetechnology@gmail.com
-
-📱 WhatsApp
-
-+1 (289) 807-3889
-
-💬 WhatsApp Community
-
-https://chat.whatsapp.com/Esv6ryXW6822pJN1c9HSmS?s=cl&p=i&ilr=2
-
----
-
-## 🤝 Contributing
-
-We welcome contributions from developers, designers, recruiters, and technology enthusiasts.
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push your branch
-5. Open a Pull Request
-
----
-
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
 
----
+## Support
 
-## ❤️ Built with passion by Eco Pulse Technology
+For support, email support@ecopulsetechnology.com or open an issue on GitHub.
 
-**Empowering Talent. Creating Opportunities.**
+## Branding
+
+Logo and branding assets are provided by Eco Pulse Technology. All rights reserved.

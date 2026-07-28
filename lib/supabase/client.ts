@@ -2,38 +2,55 @@ import { createBrowserClient } from '@supabase/ssr'
 
 let client: any = null
 
-export function createClient() {
-  // Return a mock client if env vars are not set
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    // Return a stub client that won't break the app
-    return {
-      auth: {
-        getUser: async () => ({ data: { user: null } }),
-        signInWithPassword: async () => ({ error: { message: 'Auth not configured' } }),
-        signUp: async () => ({ error: { message: 'Auth not configured' } }),
-        signOut: async () => ({}),
-      },
-      from: () => ({
-        select: () => ({
-          eq: () => ({
-            single: async () => ({ data: null }),
-          }),
-          order: () => ({
-            eq: () => ({ data: [] }),
-          }),
-        }),
-        insert: async () => ({}),
-        delete: async () => ({}),
+const mockClient = {
+  auth: {
+    getUser: async () => ({ data: { user: null } }),
+    signInWithPassword: async () => ({ error: { message: 'Auth not configured' } }),
+    signUp: async () => ({ error: { message: 'Auth not configured' } }),
+    signOut: async () => ({}),
+  },
+  from: () => ({
+    select: () => ({
+      eq: () => ({
+        single: async () => ({ data: null }),
       }),
-    }
+      order: () => ({
+        eq: () => ({ data: [] }),
+      }),
+    }),
+    insert: async () => ({}),
+    delete: async () => ({}),
+  }),
+}
+
+export function createClient() {
+  // Return mock client if env vars are not set
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return mockClient
   }
 
-  if (!client) {
+  // Use cached client if available
+  if (client) {
+    return client
+  }
+
+  try {
+    // Try to create real Supabase client with fallback
     client = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      {
+        global: {
+          headers: {
+            'x-client-info': 'supabase-js-web',
+          },
+        },
+      }
     )
+  } catch (err) {
+    console.warn('[Supabase] Failed to initialize client, using mock:', err)
+    return mockClient
   }
 
-  return client
+  return client || mockClient
 }

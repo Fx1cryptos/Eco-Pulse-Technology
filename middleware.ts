@@ -1,15 +1,9 @@
-import { type NextRequest } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 
-export async function middleware(request: NextRequest) {
-  // Only run Supabase middleware if env vars are set
-  if (
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  ) {
-    const { updateSession } = await import('@/lib/supabase/proxy')
-    return await updateSession(request)
-  }
-  return undefined
+export function middleware(request: NextRequest) {
+  // Minimal middleware - just pass through
+  // Supabase session management handled client-side
+  return NextResponse.next()
 }
 
 export const config = {
@@ -20,7 +14,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - images - .svg, .png, .jpg, .jpeg, .gif, .webp
-     * Feel free to modify this pattern to include more paths.
      */
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],

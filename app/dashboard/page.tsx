@@ -8,7 +8,7 @@ import {
   DollarSign,
   Clock,
   Bookmark,
-  BookmarkCheck,
+  BookMarked,
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -146,7 +146,7 @@ export default function JobSeekerDashboard() {
                   className="text-slate-400 hover:text-amber-400 transition-colors"
                 >
                   {savedJobs.has(job.id) ? (
-                    <BookmarkCheck className="h-6 w-6 fill-amber-400 text-amber-400" />
+                    <BookMarked className="h-6 w-6 fill-amber-400 text-amber-400" />
                   ) : (
                     <Bookmark className="h-6 w-6" />
                   )}

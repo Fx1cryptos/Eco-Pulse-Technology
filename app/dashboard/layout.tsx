@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
-import { LogOut, Menu, X } from 'lucide-react'
+import { LogOut, Menu, X, Bell } from 'lucide-react'
+import { NotificationsDropdown } from '@/components/notifications'
 
 export default function DashboardLayout({
   children,
@@ -89,6 +90,14 @@ export default function DashboardLayout({
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-6">
+              <Link
+                href="/dashboard/messages"
+                className="text-slate-400 hover:text-white transition-colors flex items-center gap-2"
+              >
+                <Bell className="h-5 w-5" />
+                <span className="text-sm">Messages</span>
+              </Link>
+              <NotificationsDropdown />
               <div className="flex items-center gap-3">
                 <span className="text-slate-300 text-sm">
                   {profile.first_name} {profile.last_name}

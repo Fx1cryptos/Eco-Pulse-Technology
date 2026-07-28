@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+:root {
+  --background: 15 23 42;
+  --foreground: 248 250 252;
+  --primary: 217 119 6;
+  --accent: 217 119 6;
+  --slate-900: 15 23 42;
+  --slate-800: 30 41 59;
+  --slate-700: 51 65 85;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: 248 250 252;
+    --foreground: 15 23 42;
+  }
+}

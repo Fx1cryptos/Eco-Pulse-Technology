@@ -2,10 +2,10 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { useMemo, useState } from 'react'
 import { 
   ArrowRight, 
   Briefcase, 
-  Users,
   Globe,
   Search,
   MessageSquare,
@@ -17,14 +17,40 @@ import {
 } from 'lucide-react'
 
 export default function LandingPage() {
-  const categories = [
-    { title: 'Skilled Trades & Construction', detail: 'Electricians, HVAC, plumbing, solar, carpentry and more', icon: Briefcase },
-    { title: 'Healthcare & Caregiving', detail: 'Caregivers, CNAs, RNs, disability support and home health', icon: Users },
-    { title: 'Transportation & Logistics', detail: 'CDL drivers, delivery, warehouse and fleet operations', icon: TrendingUp },
-    { title: 'Technology & Engineering', detail: 'Software, IT, cybersecurity, data and engineering roles', icon: Globe },
-    { title: 'Administrative & Office', detail: 'Support, operations, HR, customer service and remote work', icon: MessageSquare },
-    { title: 'Hospitality & General Employment', detail: 'Hotels, restaurants, retail, security and event work', icon: Award }
+  const jobs = [
+    { title: 'Senior Software Engineer (Frontend)', company: 'Tekmetric', location: 'Remote USA', mode: 'Remote', type: 'Full-time', salary: '$125,000–$165,000/year', description: 'Build polished product experiences for a modern automotive software platform.', experience: 'Senior' },
+    { title: 'Customer Service Representative', company: 'ibex', location: 'New Mexico residents', mode: 'Remote', type: 'Full-time', salary: '$16.50/hour', description: 'Support customers through thoughtful, reliable service from home.', experience: 'Entry level' },
+    { title: 'Inpatient Coding Specialist', company: 'e4health', location: 'Remote USA', mode: 'Remote', type: 'Full-time', salary: 'From $35/hour', description: 'Apply clinical coding expertise to accurate inpatient documentation.', experience: 'Experienced' },
+    { title: 'Strategic Finance Associate', company: 'Pepper', location: 'Remote USA', mode: 'Remote', type: 'Full-time', salary: '$95,000–$115,000/year', description: 'Partner with teams on planning, analysis and strategic financial decisions.', experience: 'Associate' },
+    { title: 'Operations Associate', company: 'Stash', location: 'Remote USA', mode: 'Remote', type: 'Full-time', salary: '$70,000–$80,000/year', description: 'Improve operational processes for a customer-first financial platform.', experience: 'Associate' },
+    { title: 'FP&A Manager', company: 'Robert Half Client', location: 'Glen Rock, NJ', mode: 'Hybrid', type: 'Contract / Temp-to-Hire', salary: '$76–$88/hour', description: 'Lead forecasting, budgeting and reporting for a growing organization.', experience: 'Manager' },
+    { title: 'Hybrid Cloud Engineer', company: 'TEGNA Inc.', location: 'Virginia, IL', mode: 'Hybrid', type: 'Full-time', salary: 'Competitive', description: 'Design, support and improve cloud infrastructure and enterprise systems.', experience: 'Experienced' },
+    { title: 'Board Certified Behavior Analyst (BCBA)', company: 'Smilestones ABA', location: 'Houston, TX', mode: 'Hybrid', type: 'Full-time', salary: '$60–$80/hour', description: 'Lead individualized behavior support programs for children and families.', experience: 'Certified' },
+    { title: 'Psychologist', company: 'Greenlife Healthcare Staffing', location: 'Bronx, NY', mode: 'Hybrid', type: 'Full-time', salary: '$115,000–$125,000/year', description: 'Deliver patient-centered psychological services within a collaborative care team.', experience: 'Licensed' },
+    { title: 'Data Engineer (GenAI & AWS)', company: 'Tech / Consulting Partner', location: 'Jacksonville, FL', mode: 'Hybrid', type: 'Full-time', salary: '$110,000–$145,000/year', description: 'Build reliable data systems and generative AI solutions on AWS.', experience: 'Experienced' },
+    { title: 'General Warehouse Associate', company: 'Randstad Staffing', location: 'Tracy, CA', mode: 'On-site', type: 'Full-time', salary: '$18–$23/hour', description: 'Support receiving, picking, packing and shipping operations.', experience: 'Entry level' },
+    { title: 'Production Associate', company: 'Randstad Staffing', location: 'Bowie, MD', mode: 'On-site', type: 'Full-time', salary: '$17/hour', description: 'Join a production team focused on quality, safety and dependable output.', experience: 'Entry level' },
+    { title: 'Mid-Level Designer', company: 'Brand & Visual Systems', location: 'San Francisco, CA', mode: 'On-site', type: 'Full-time', salary: '$85,000–$115,000/year', description: 'Create brand systems and visual experiences across digital and print.', experience: 'Mid-level' },
+    { title: 'IT Technician', company: 'Robert Half Staffing', location: 'Austin, TX', mode: 'On-site', type: 'Full-time', salary: '$18.21–$21.09/hour', description: 'Provide hands-on technical support across workplace devices and systems.', experience: 'Experienced' },
+    { title: 'Neuroradiologist Physician', company: 'UC Health System', location: 'Sacramento, CA', mode: 'On-site', type: 'Full-time', salary: '$350,000+/year', description: 'Join a physician-led team providing specialized neuroradiology care.', experience: 'Physician' },
+    { title: 'Real Estate Acquisition Specialist', company: 'Estate Solutions Group', location: 'Atlanta, GA', mode: 'On-site', type: 'Full-time', salary: '$80,000–$150,000/year', description: 'Source and evaluate acquisition opportunities while building client relationships.', experience: 'Experienced' },
+    { title: 'Journeyman Electrician', company: 'Holland Electrical Systems', location: 'Holland, MI', mode: 'On-site', type: 'Full-time', salary: '$77,000–$82,000/year', description: 'Install, maintain and troubleshoot electrical systems on active job sites.', experience: 'Journeyman' },
+    { title: 'Commercial & Residential Electrician', company: 'Standtech Electric', location: 'Port Washington, NY', mode: 'On-site', type: 'Full-time', salary: '$80,000–$120,000/year', description: 'Deliver safe electrical installations and service for residential and commercial customers.', experience: 'Experienced' },
+    { title: 'Solar Installation Electrician', company: 'SunPower', location: 'Raleigh, NC', mode: 'On-site', type: 'Full-time', salary: '$80,000–$100,000/year', description: 'Install and commission solar energy systems with a safety-first team.', experience: 'Experienced' },
+    { title: 'Facilities Handyman / Maintenance Technician', company: 'Mr. Handyman', location: 'Dallas, TX', mode: 'On-site', type: 'Full-time', salary: '$25–$35/hour', description: 'Keep homes and facilities safe, functional and well maintained.', experience: 'Experienced' },
+    { title: 'In-Home Caregiver for Seniors', company: 'Home Instead', location: 'Sequim, WA', mode: 'On-site', type: 'Part-time / Full-time', salary: '$20–$23/hour', description: 'Provide compassionate daily support and companionship to older adults.', experience: 'Caregiving' },
+    { title: 'Direct Support Professional', company: 'Creative Positive Environments', location: 'La Verne, CA', mode: 'On-site', type: 'Full-time', salary: '$17.50–$18/hour', description: 'Support individuals with developmental disabilities in daily living and community activities.', experience: 'Entry level' },
+    { title: 'Certified Nursing Assistant / Home Health Aide', company: 'BrightStar Care', location: 'Stillwater, MN', mode: 'On-site', type: 'Part-time / Full-time', salary: '$21–$23/hour', description: 'Deliver respectful, dependable care in clients’ homes.', experience: 'Certified' },
+    { title: 'Senior Care Aide', company: 'Visiting Angels', location: 'Nashua, NH', mode: 'On-site', type: 'Part-time / Full-time', salary: '$18–$25/hour', description: 'Help seniors remain independent with personalized in-home support.', experience: 'Caregiving' }
   ]
+
+  const [jobMode, setJobMode] = useState('All')
+  const [jobQuery, setJobQuery] = useState('')
+  const filteredJobs = useMemo(() => jobs.filter((job) => {
+    const matchesMode = jobMode === 'All' || job.mode === jobMode
+    const query = jobQuery.trim().toLowerCase()
+    return matchesMode && (!query || `${job.title} ${job.company} ${job.location}`.toLowerCase().includes(query))
+  }), [jobMode, jobQuery])
 
   const features = [
     {
@@ -155,6 +181,14 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* Main platform banner */}
+        <section className="bg-amber-50 border-y border-amber-100 py-6">
+          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div><p className="font-bold text-slate-900">Looking for more opportunities?</p><p className="text-sm text-slate-600 mt-1">Explore additional career resources and opportunities on our main platform.</p></div>
+            <Link href="https://eco-pulse-technology.vercel.app" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-600 px-5 py-3 text-sm font-bold text-white hover:bg-amber-700 transition-colors">Visit Eco Pulse Main Site <ArrowRight className="h-4 w-4" /></Link>
+          </div>
+        </section>
+
         {/* Platform capabilities banner */}
         <section className="bg-white border-y border-slate-200 py-10">
           <div className="max-w-7xl mx-auto px-4">
@@ -173,33 +207,50 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Live Jobs Directory Banner */}
+        {/* Jobs Directory */}
         <section id="jobs" className="py-20 bg-gradient-to-b from-slate-50 to-white">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
               <div>
-                <p className="text-sm font-bold uppercase tracking-widest text-amber-600 mb-3">Live opportunities</p>
-                <h2 className="text-4xl font-bold text-slate-900 mb-4">Search jobs by category</h2>
-                <p className="text-lg text-slate-600 max-w-2xl">Eco Pulse Technology is built to surface current listings with source, posting date and direct application details. Connect a live feed to publish verified openings here.</p>
+                <p className="text-sm font-bold uppercase tracking-widest text-amber-600 mb-3">Current opportunities</p>
+                <h2 className="text-4xl font-bold text-slate-900 mb-4">Find work that fits your life</h2>
+                <p className="text-lg text-slate-600 max-w-2xl">Browse the latest openings across remote, hybrid and on-site teams. Confirm availability and application details with the employer before applying.</p>
               </div>
-              <Link href="/dashboard" className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors">Open job directory <ArrowRight className="h-4 w-4" /></Link>
+              <Link href="https://eco-pulse-technology.vercel.app" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors">Visit main platform <ArrowRight className="h-4 w-4" /></Link>
             </div>
+            <div className="flex flex-col md:flex-row gap-3 mb-8">
+              <label className="flex-1 flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-3">
+                <Search className="h-4 w-4 text-slate-400" />
+                <span className="sr-only">Filter jobs</span>
+                <input value={jobQuery} onChange={(event) => setJobQuery(event.target.value)} placeholder="Search title, company or location" className="w-full text-sm text-slate-900 outline-none" />
+              </label>
+              <div className="flex gap-2 overflow-x-auto">
+                {['All', 'Remote', 'Hybrid', 'On-site'].map((mode) => (
+                  <button key={mode} type="button" onClick={() => setJobMode(mode)} className={`whitespace-nowrap rounded-lg px-4 py-3 text-sm font-semibold transition-colors ${jobMode === mode ? 'bg-amber-500 text-white' : 'bg-white border border-slate-200 text-slate-700 hover:border-amber-400'}`}>{mode}</button>
+                ))}
+              </div>
+            </div>
+            <p className="text-sm text-slate-500 mb-5">Showing {filteredJobs.length} of {jobs.length} opportunities</p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {categories.map((category) => {
-                const Icon = category.icon
-                return (
-                  <Link key={category.title} href={`/dashboard?q=${encodeURIComponent(category.title)}`} className="group bg-white border border-slate-200 rounded-xl p-6 hover:border-amber-400 hover:shadow-lg transition-all">
-                    <div className="flex items-start justify-between gap-4 mb-5">
-                      <div className="p-3 bg-amber-100 rounded-lg"><Icon className="h-6 w-6 text-amber-700" /></div>
-                      <ArrowRight className="h-5 w-5 text-slate-300 group-hover:text-amber-600 transition-colors" />
-                    </div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-2">{category.title}</h3>
-                    <p className="text-sm leading-6 text-slate-600">{category.detail}</p>
-                  </Link>
-                )
-              })}
+              {filteredJobs.map((job) => (
+                <article key={`${job.title}-${job.company}`} className="bg-white border border-slate-200 rounded-xl p-6 hover:border-amber-400 hover:shadow-lg transition-all flex flex-col">
+                  <div className="flex items-start justify-between gap-3 mb-4">
+                    <span className={`rounded-full px-3 py-1 text-xs font-bold ${job.mode === 'Remote' ? 'bg-emerald-100 text-emerald-700' : job.mode === 'Hybrid' ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-700'}`}>{job.mode}</span>
+                    <Briefcase className="h-5 w-5 text-amber-600" />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 leading-snug">{job.title}</h3>
+                  <p className="mt-1 text-sm font-semibold text-amber-700">{job.company}</p>
+                  <div className="mt-4 space-y-2 text-sm text-slate-600">
+                    <p className="flex gap-2"><MapPin className="h-4 w-4 shrink-0" />{job.location}</p>
+                    <p className="flex gap-2"><Award className="h-4 w-4 shrink-0" />{job.experience} · {job.type}</p>
+                    <p className="font-bold text-slate-900">{job.salary}</p>
+                  </div>
+                  <p className="mt-4 text-sm leading-6 text-slate-600 flex-1">{job.description}</p>
+                  <Link href="https://eco-pulse-technology.vercel.app" target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-3 text-sm font-bold text-white hover:bg-amber-600 transition-colors">View details <ArrowRight className="h-4 w-4" /></Link>
+                </article>
+              ))}
             </div>
-            <p className="mt-8 text-center text-xs text-slate-500">Listings should be displayed only after an authorized job feed or employer submission confirms availability. No sample vacancies are presented as real jobs.</p>
+            <p className="mt-8 text-center text-xs text-slate-500">Job information was supplied for this directory and should be verified with the listed employer. Eco Pulse Technology does not guarantee availability, compensation or hiring outcomes.</p>
           </div>
         </section>
 
@@ -380,6 +431,7 @@ export default function LandingPage() {
                   <li><Link href="#" className="hover:text-white transition">About Us</Link></li>
                   <li><Link href="#" className="hover:text-white transition">Blog</Link></li>
                   <li><Link href="#" className="hover:text-white transition">Contact</Link></li>
+                  <li><a href="https://nextdoor.com/page/eco-pulse-technology?share_platform=10&utm_campaign=1793623090650&share_action_id=ed9c787a-5f48-482d-8cd1-6e7fad92bcbc" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Nextdoor community</a></li>
                 </ul>
               </div>
               <div>

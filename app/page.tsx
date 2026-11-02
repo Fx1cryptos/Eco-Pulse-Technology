@@ -11,58 +11,19 @@ import {
   MessageSquare,
   Award,
   CheckCircle,
-  Star,
   MapPin,
-  DollarSign,
-  Clock,
   Bell,
   TrendingUp
 } from 'lucide-react'
 
 export default function LandingPage() {
-  const testimonials = [
-    {
-      name: 'Sarah Chen',
-      role: 'Environmental Engineer',
-      company: 'GreenTech Solutions',
-      text: 'Found my dream job through Eco Pulse. The quality of matches was incredible!'
-    },
-    {
-      name: 'Marcus Johnson',
-      role: 'Sustainability Manager',
-      company: 'EcoVentures Inc',
-      text: 'As an employer, the platform made finding qualified candidates seamless.'
-    },
-    {
-      name: 'Elena Rodriguez',
-      role: 'Climate Tech Lead',
-      company: 'Future Earth',
-      text: 'The community aspect really sets this platform apart. Love connecting with like-minded professionals.'
-    }
-  ]
-
-  const jobs = [
-    {
-      title: 'Senior Environmental Engineer',
-      company: 'GreenTech Solutions',
-      location: 'San Francisco, CA',
-      salary: '$120K - $160K',
-      type: 'Full-time'
-    },
-    {
-      title: 'Sustainability Manager',
-      company: 'EcoVentures Inc',
-      location: 'New York, NY',
-      salary: '$90K - $130K',
-      type: 'Full-time'
-    },
-    {
-      title: 'Climate Tech Developer',
-      company: 'Future Earth',
-      location: 'Remote',
-      salary: '$100K - $150K',
-      type: 'Remote'
-    }
+  const categories = [
+    { title: 'Skilled Trades & Construction', detail: 'Electricians, HVAC, plumbing, solar, carpentry and more', icon: Briefcase },
+    { title: 'Healthcare & Caregiving', detail: 'Caregivers, CNAs, RNs, disability support and home health', icon: Users },
+    { title: 'Transportation & Logistics', detail: 'CDL drivers, delivery, warehouse and fleet operations', icon: TrendingUp },
+    { title: 'Technology & Engineering', detail: 'Software, IT, cybersecurity, data and engineering roles', icon: Globe },
+    { title: 'Administrative & Office', detail: 'Support, operations, HR, customer service and remote work', icon: MessageSquare },
+    { title: 'Hospitality & General Employment', detail: 'Hotels, restaurants, retail, security and event work', icon: Award }
   ]
 
   const features = [
@@ -156,21 +117,26 @@ export default function LandingPage() {
                 <p className="text-lg text-slate-200 mb-8 leading-relaxed">
                   Discover meaningful employment opportunities with companies committed to environmental sustainability and social impact. Connect with employers who share your values.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link
-                    href="/auth/sign-up"
-                    className="px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-lg transition-all hover:shadow-lg flex items-center justify-center gap-2"
-                  >
-                    Search Jobs <ArrowRight className="h-5 w-5" />
-                  </Link>
-                  <Link
-                    href="https://ecopulse-career.lovable.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-8 py-4 border-2 border-white text-white hover:bg-white/10 font-bold rounded-lg transition-all flex items-center justify-center gap-2"
-                  >
-                    Visit Career Portal
-                  </Link>
+                <form action="/dashboard" className="bg-white rounded-xl p-3 shadow-xl max-w-2xl">
+                  <div className="grid sm:grid-cols-[1fr_1fr_auto] gap-2">
+                    <label className="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2">
+                      <Search className="h-4 w-4 text-slate-400" />
+                      <span className="sr-only">Job title or keyword</span>
+                      <input name="q" placeholder="Job title or keyword" className="w-full text-sm text-slate-900 outline-none" />
+                    </label>
+                    <label className="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2">
+                      <MapPin className="h-4 w-4 text-slate-400" />
+                      <span className="sr-only">Location</span>
+                      <input name="location" placeholder="City, state or ZIP" className="w-full text-sm text-slate-900 outline-none" />
+                    </label>
+                    <button type="submit" className="px-5 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
+                      Search <ArrowRight className="h-4 w-4" />
+                    </button>
+                  </div>
+                </form>
+                <div className="mt-5 flex flex-wrap gap-4 text-sm text-slate-200">
+                  <span className="inline-flex items-center gap-2"><CheckCircle className="h-4 w-4 text-amber-400" />Browse without an account</span>
+                  <span className="inline-flex items-center gap-2"><CheckCircle className="h-4 w-4 text-amber-400" />Apply on the original employer site</span>
                 </div>
               </div>
               <div className="hidden lg:flex justify-center">
@@ -189,87 +155,51 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Stats Banner */}
-        <section className="bg-white border-y border-slate-200 py-12">
+        {/* Platform capabilities banner */}
+        <section className="bg-white border-y border-slate-200 py-10">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-6">
-              <div className="text-center">
-                <p className="text-3xl font-bold text-amber-600">5,000+</p>
-                <p className="text-sm text-slate-600 mt-1">Active Jobs</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-bold text-amber-600">2,000+</p>
-                <p className="text-sm text-slate-600 mt-1">Companies</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-bold text-amber-600">50K+</p>
-                <p className="text-sm text-slate-600 mt-1">Job Seekers</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-bold text-amber-600">98%</p>
-                <p className="text-sm text-slate-600 mt-1">Match Rate</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-bold text-amber-600">4.9★</p>
-                <p className="text-sm text-slate-600 mt-1">Avg Rating</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-bold text-amber-600">24h</p>
-                <p className="text-sm text-slate-600 mt-1">Response Time</p>
-              </div>
+            <div className="grid sm:grid-cols-3 gap-6">
+              {[
+                { title: 'Nationwide discovery', text: 'Search across all 50 states, cities, ZIP codes and remote roles.' },
+                { title: 'Multiple work styles', text: 'Compare full-time, part-time, contract, temporary and freelance options.' },
+                { title: 'Built for real applications', text: 'Keep the original source and direct application path visible.' }
+              ].map((item) => (
+                <div key={item.title} className="flex gap-3">
+                  <CheckCircle className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" />
+                  <div><p className="font-bold text-slate-900">{item.title}</p><p className="text-sm text-slate-600 mt-1">{item.text}</p></div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Featured Jobs Section */}
+        {/* Live Jobs Directory Banner */}
         <section id="jobs" className="py-20 bg-gradient-to-b from-slate-50 to-white">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-slate-900 mb-4">Featured Opportunities</h2>
-              <p className="text-lg text-slate-600">Explore curated positions from leading sustainable companies</p>
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-widest text-amber-600 mb-3">Live opportunities</p>
+                <h2 className="text-4xl font-bold text-slate-900 mb-4">Search jobs by category</h2>
+                <p className="text-lg text-slate-600 max-w-2xl">Eco Pulse Technology is built to surface current listings with source, posting date and direct application details. Connect a live feed to publish verified openings here.</p>
+              </div>
+              <Link href="/dashboard" className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors">Open job directory <ArrowRight className="h-4 w-4" /></Link>
             </div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {jobs.map((job, idx) => (
-                <div key={idx} className="bg-white border border-slate-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-lg font-bold text-slate-900 mb-1">{job.title}</h3>
-                      <p className="text-sm text-amber-600 font-medium">{job.company}</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {categories.map((category) => {
+                const Icon = category.icon
+                return (
+                  <Link key={category.title} href={`/dashboard?q=${encodeURIComponent(category.title)}`} className="group bg-white border border-slate-200 rounded-xl p-6 hover:border-amber-400 hover:shadow-lg transition-all">
+                    <div className="flex items-start justify-between gap-4 mb-5">
+                      <div className="p-3 bg-amber-100 rounded-lg"><Icon className="h-6 w-6 text-amber-700" /></div>
+                      <ArrowRight className="h-5 w-5 text-slate-300 group-hover:text-amber-600 transition-colors" />
                     </div>
-                  </div>
-                  <div className="space-y-3 mb-6">
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <MapPin className="h-4 w-4" />
-                      <span className="text-sm">{job.location}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <DollarSign className="h-4 w-4" />
-                      <span className="text-sm">{job.salary}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <Clock className="h-4 w-4" />
-                      <span className="text-sm">{job.type}</span>
-                    </div>
-                  </div>
-                  <Link
-                    href="/auth/sign-up"
-                    className="w-full py-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition-colors text-sm text-center"
-                  >
-                    Apply Now
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">{category.title}</h3>
+                    <p className="text-sm leading-6 text-slate-600">{category.detail}</p>
                   </Link>
-                </div>
-              ))}
+                )
+              })}
             </div>
-
-            <div className="text-center mt-12">
-              <Link
-                href="/auth/login"
-                className="inline-block px-8 py-3 border-2 border-amber-600 text-amber-600 hover:bg-amber-50 font-bold rounded-lg transition-colors"
-              >
-                View All Jobs →
-              </Link>
-            </div>
+            <p className="mt-8 text-center text-xs text-slate-500">Listings should be displayed only after an authorized job feed or employer submission confirms availability. No sample vacancies are presented as real jobs.</p>
           </div>
         </section>
 
@@ -298,31 +228,24 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
+        {/* Trust and transparency banner */}
         <section className="py-20 bg-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">Loved by Professionals</h2>
-              <p className="text-lg text-slate-300">Join thousands who found their perfect sustainable career</p>
+            <div className="max-w-3xl mb-12">
+              <p className="text-sm font-bold uppercase tracking-widest text-amber-400 mb-3">Trust by design</p>
+              <h2 className="text-4xl font-bold mb-4">A clearer way to find work</h2>
+              <p className="text-lg text-slate-300">Every published vacancy should show where it came from, when it was posted and where the application goes. Eco Pulse Technology keeps the job seeker in control.</p>
             </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <div 
-                  key={index}
-                  className="p-8 bg-slate-800 rounded-lg border border-slate-700"
-                >
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-                  <p className="text-slate-300 mb-6 italic">"{testimonial.text}"</p>
-                  <div>
-                    <p className="font-bold text-white">{testimonial.name}</p>
-                    <p className="text-sm text-amber-400">{testimonial.role}</p>
-                    <p className="text-sm text-slate-400">{testimonial.company}</p>
-                  </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { title: 'Original source links', text: 'Apply through the employer or authorized job provider—not an unknown intermediary.' },
+                { title: 'Freshness signals', text: 'Show posting dates, deadlines and availability status when the source provides them.' },
+                { title: 'Privacy-conscious tools', text: 'Save jobs, manage alerts and build a profile without exposing private information publicly.' }
+              ].map((item) => (
+                <div key={item.title} className="p-7 bg-slate-800 rounded-xl border border-slate-700">
+                  <CheckCircle className="h-6 w-6 text-amber-400 mb-5" />
+                  <h3 className="font-bold text-white mb-2">{item.title}</h3>
+                  <p className="text-sm leading-6 text-slate-300">{item.text}</p>
                 </div>
               ))}
             </div>

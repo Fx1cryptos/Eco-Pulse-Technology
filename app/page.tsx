@@ -41,8 +41,47 @@ export default function LandingPage() {
     { title: 'In-Home Caregiver for Seniors', company: 'Home Instead', location: 'Sequim, WA', mode: 'On-site', type: 'Part-time / Full-time', salary: '$20–$23/hour', description: 'Provide compassionate daily support and companionship to older adults.', experience: 'Caregiving' },
     { title: 'Direct Support Professional', company: 'Creative Positive Environments', location: 'La Verne, CA', mode: 'On-site', type: 'Full-time', salary: '$17.50–$18/hour', description: 'Support individuals with developmental disabilities in daily living and community activities.', experience: 'Entry level' },
     { title: 'Certified Nursing Assistant / Home Health Aide', company: 'BrightStar Care', location: 'Stillwater, MN', mode: 'On-site', type: 'Part-time / Full-time', salary: '$21–$23/hour', description: 'Deliver respectful, dependable care in clients’ homes.', experience: 'Certified' },
-    { title: 'Senior Care Aide', company: 'Visiting Angels', location: 'Nashua, NH', mode: 'On-site', type: 'Part-time / Full-time', salary: '$18–$25/hour', description: 'Help seniors remain independent with personalized in-home support.', experience: 'Caregiving' }
+    { title: 'Senior Care Aide', company: 'Visiting Angels', location: 'Nashua, NH', mode: 'On-site', type: 'Part-time / Full-time', salary: '$18–$25/hour', description: 'Help seniors remain independent with personalized in-home support.', experience: 'Caregiving' },
+    { title: 'Full-Time Executive Nanny', company: 'The Nanny Authority', location: 'New York, NY', mode: 'On-site', type: 'Full-time', salary: '$30–$40/hour', description: 'Provide complete household child care, developmental activity planning and schedule management for a private family.', experience: 'Mid to Senior-level' },
+    { title: 'Full-Time Infant & Toddler Nanny', company: 'Twinkle Toes Nanny Agency', location: 'Huntersville, NC', mode: 'On-site', type: 'Full-time', salary: '$18–$32/hour', description: 'Manage infant feeding schedules, diapering, early cognitive play and a structured domestic routine.', experience: 'Mid-level' },
+    { title: 'High-Profile Full-Time Nanny', company: 'High Profile Nanny', location: 'Atlanta, GA', mode: 'On-site', type: 'Full-time', salary: '$20–$35/hour', description: 'Deliver active care, transportation to activities, meal preparation and homework assistance.', experience: 'Mid-level' },
+    { title: 'In-Home Senior Companion Caregiver', company: 'Visiting Angels', location: 'Columbus, OH', mode: 'On-site / Home Care', type: 'Part-time / Full-time', salary: '$16–$20/hour', description: 'Provide non-medical elderly support including meal preparation, mobility aid, light housekeeping and medication reminders.', experience: 'Entry-level' },
+    { title: 'Certified Direct Support Professional', company: 'Community Care Alliance', location: 'Providence, RI', mode: 'On-site', type: 'Full-time', salary: '$18–$22/hour', description: 'Assist adults with developmental and physical disabilities in life skills training, community events and daily home living.', experience: 'Entry to Mid-level' },
+    { title: 'Private Duty Home Health Aide', company: 'Griswold Home Care', location: 'Philadelphia, PA', mode: 'On-site', type: 'Full-time / Flexible Shifts', salary: '$17–$21/hour', description: 'Assist elderly and disabled individuals with personal hygiene, physical transfers, meals and vital signs monitoring.', experience: 'Entry-level / Certified' },
+    { title: 'Senior Smart Contract Auditor', company: 'Mercer Labs', location: 'Remote – USA', mode: 'Remote', type: 'Full-time', salary: '$130,000–$170,000/year', description: 'Perform security vulnerability assessments, static code audits and formal verification testing on Solidity and EVM smart contracts.', experience: 'Senior-level' },
+    { title: 'Blockchain Protocol & Node Infrastructure Engineer', company: 'Tempo', location: 'Remote – USA', mode: 'Remote', type: 'Full-time', salary: '$140,000–$185,000/year', description: 'Design and maintain high-throughput blockchain node infrastructure, cryptographic protocols and distributed consensus systems.', experience: 'Mid to Senior-level' },
+    { title: 'Web3 Ecosystem Growth & Product Manager', company: 'Jito Labs', location: 'Remote – USA', mode: 'Remote', type: 'Full-time', salary: '$140,000–$155,000/year', description: 'Lead developer outreach, manage protocol integration partners and drive product adoption across Web3 platforms.', experience: 'Mid-level' },
+    { title: 'Flooring Installer & Restoration Technician', company: 'Floor Coverings International', location: 'Austin, TX', mode: 'On-site', type: 'Full-time', salary: '$22–$35/hour', description: 'Repair subfloors and install luxury vinyl, tile and hardwood floors in residential settings.', experience: 'Mid-level' },
+    { title: 'Commercial Hardwood & Epoxy Flooring Repair Specialist', company: 'Surfacing Solutions Inc.', location: 'Chicago, IL', mode: 'On-site', type: 'Full-time', salary: '$25–$38/hour', description: 'Sand, stain, seal and repair commercial wood, laminate and epoxy floor surfaces.', experience: 'Mid to Senior-level' },
+    { title: 'Journeyman Service Plumber', company: 'Roto-Rooter Services Company', location: 'Denver, CO', mode: 'On-site', type: 'Full-time', salary: '$30–$45/hour', description: 'Diagnose and repair drainage systems, pipework and replacement fixtures for residential and commercial customers.', experience: 'Mid-level / Licensed' },
+    { title: 'Residential Plumbing Technician', company: 'Benjamin Franklin Plumbing', location: 'Tampa, FL', mode: 'On-site', type: 'Full-time', salary: '$65,000–$95,000/year', description: 'Maintain home plumbing lines, install water heaters, diagnose drains and repair leaks.', experience: 'Mid-level' },
+    { title: 'Industrial Pipe & Structural Welder', company: 'ASR Group', location: 'Arabi, LA', mode: 'On-site', type: 'Full-time', salary: '$36.38/hour', description: 'Perform precision TIG and MIG welding on industrial pipe networks and structural frameworks.', experience: 'Mid to Senior-level' },
+    { title: 'Precision Aerospace Welder (Level 4)', company: 'Honeywell', location: 'Arvada, CO', mode: 'On-site', type: 'Full-time', salary: '$30–$38/hour', description: 'Operate high-precision ASME-compliant welding tools on pressure vessels and specialized components.', experience: 'Senior-level' },
+    { title: 'Associate Small Animal Veterinarian', company: 'The Vet Service Partner Practice', location: 'Seattle, WA', mode: 'On-site', type: 'Full-time', salary: '$100,000–$180,000/year', description: 'Provide medical evaluations, surgery and preventative healthcare for companion animals.', experience: 'Senior-level / Licensed DVM' },
+    { title: 'Certified Commercial Pest Control Technician', company: 'American Pest', location: 'Fairfax, VA', mode: 'On-site', type: 'Full-time', salary: '$24–$36/hour', description: 'Perform pest inspections, targeted treatments, sealing work and compliance reporting.', experience: 'Mid-level / Certified' },
+    { title: 'Paid Brand Grooming & Pet Content Professional', company: 'The Desire Company', location: 'Remote / Field – USA', mode: 'Hybrid / Project', type: 'Contract / Gig-based', salary: 'Up to $1,500/week', description: 'Demonstrate professional pet care techniques on camera and feature in commercial digital media.', experience: 'Mid-level' }
   ]
+
+  const jobSourceLinks: Record<string, string> = {
+    'Full-Time Executive Nanny': 'https://nannyauthority.com/nanny-positions/find-available-nanny-jobs-online/',
+    'Full-Time Infant & Toddler Nanny': 'https://www.ziprecruiter.com/Jobs/Nanny',
+    'High-Profile Full-Time Nanny': 'https://www.ziprecruiter.com/Jobs/Nanny',
+    'In-Home Senior Companion Caregiver': 'https://www.indeed.com/q-babysitter-nanny-l-united-states-jobs.html',
+    'Certified Direct Support Professional': 'https://www.ziprecruiter.com/Jobs/Elderly-Caregiver',
+    'Private Duty Home Health Aide': 'https://www.ziprecruiter.com/Jobs/Elderly-Caregiver',
+    'Senior Smart Contract Auditor': 'https://www.remote3.co/web3-jobs-in/usa',
+    'Blockchain Protocol & Node Infrastructure Engineer': 'https://www.remote3.co/web3-jobs-in/usa',
+    'Web3 Ecosystem Growth & Product Manager': 'https://www.remote3.co/web3-jobs-in/usa',
+    'Flooring Installer & Restoration Technician': 'https://www.indeed.com/q-flooring-installer-jobs.html',
+    'Commercial Hardwood & Epoxy Flooring Repair Specialist': 'https://www.indeed.com/q-flooring-repair-jobs.html',
+    'Journeyman Service Plumber': 'https://www.indeed.com/q-plumber-jobs.html',
+    'Residential Plumbing Technician': 'https://www.ziprecruiter.com/Jobs/Plumber',
+    'Industrial Pipe & Structural Welder': 'https://www.indeed.com/q-welder-require-in-2026-jobs.html',
+    'Precision Aerospace Welder (Level 4)': 'https://www.indeed.com/q-welder-require-in-2026-jobs.html',
+    'Associate Small Animal Veterinarian': 'https://thevetservice.com/jobcountry/united-states/',
+    'Certified Commercial Pest Control Technician': 'https://americanpest.applicantpro.com/',
+    'Paid Brand Grooming & Pet Content Professional': 'https://www.ziprecruiter.com/Jobs/Pet-Modeling'
+  }
 
   const [jobMode, setJobMode] = useState('All')
   const [jobQuery, setJobQuery] = useState('')
@@ -246,7 +285,7 @@ export default function LandingPage() {
                     <p className="font-bold text-slate-900">{job.salary}</p>
                   </div>
                   <p className="mt-4 text-sm leading-6 text-slate-600 flex-1">{job.description}</p>
-                  <Link href="https://eco-pulse-technology.vercel.app" target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-3 text-sm font-bold text-white hover:bg-amber-600 transition-colors">View details <ArrowRight className="h-4 w-4" /></Link>
+                  <a href={jobSourceLinks[job.title] ?? 'https://eco-pulse-technology.vercel.app'} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-3 text-sm font-bold text-white hover:bg-amber-600 transition-colors">View source & apply <ArrowRight className="h-4 w-4" /></a>
                 </article>
               ))}
             </div>
